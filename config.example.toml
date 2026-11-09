@@ -1,0 +1,19 @@
+# /etc/log-watcher/config.toml
+
+[source]
+type = "journal"              # "journal" (systemd) or "file"
+file = "/var/log/auth.log"    # used when type = "file"
+
+[detection]
+bruteforce_threshold = 5          # failed logins from one IP ...
+bruteforce_window_minutes = 10    # ... within this many minutes
+alert_cooldown_minutes = 60       # repeat an alert for the same IP at most once an hour
+success_after_failures = 3        # a login after this many failures is critical
+ignore_networks = ["127.0.0.0/8", "::1/128"]   # add your LAN, e.g. "192.168.1.0/24"
+alert_on_sudo = false             # report every sudo command (noisy)
+
+[output]
+state_file = "/var/lib/log-watcher/state.json"
+metrics_dir = "/var/lib/node_exporter/textfile_collector"   # "" to disable
+# Prefer the file or the LOG_WATCHER_DISCORD_WEBHOOK env variable over putting the URL here.
+discord_webhook_file = "/etc/log-watcher/discord_webhook"

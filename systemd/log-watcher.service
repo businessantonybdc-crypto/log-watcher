@@ -1,0 +1,26 @@
+[Unit]
+Description=log-watcher: SSH brute force and suspicious login detection
+After=network-online.target systemd-journald.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/opt/log-watcher/venv/bin/log-watcher --config /etc/log-watcher/config.toml
+Restart=on-failure
+RestartSec=5
+# Needs to read the journal, nothing else.
+User=log-watcher
+Group=systemd-journal
+SupplementaryGroups=adm
+StateDirectory=log-watcher
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/node_exporter/textfile_collector
+PrivateTmp=true
+NoNewPrivileges=true
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+SystemCallArchitectures=native
+
+[Install]
+WantedBy=multi-user.target
