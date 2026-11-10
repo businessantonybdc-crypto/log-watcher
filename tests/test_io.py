@@ -4,11 +4,11 @@ import time
 from datetime import UTC
 from pathlib import Path
 
-from logwatcher import metrics, state
-from logwatcher.alerts import DiscordSink
-from logwatcher.cli import main
-from logwatcher.detector import Alert, Severity
-from logwatcher.sources import follow_file
+from logwarden import metrics, state
+from logwarden.alerts import DiscordSink
+from logwarden.cli import main
+from logwarden.detector import Alert, Severity
+from logwarden.sources import follow_file
 
 FIXTURE = Path(__file__).parent / "fixtures" / "auth.log"
 LINE = "2026-11-09T10:00:0{i}.000000+01:00 h sshd[1]: Invalid user u{i} from 203.0.113.{i} port 1\n"
@@ -49,10 +49,10 @@ def test_follow_survives_rotation(tmp_path):
 def test_metrics_render_and_atomic_write(tmp_path):
     counters = {"events_failed": 7, "alerts_bruteforce": 1}
     metrics.write(tmp_path, counters, "mc-01")
-    text = (tmp_path / "log_watcher.prom").read_text()
-    assert 'log_watcher_events_total{host="mc-01",kind="failed"} 7' in text
-    assert 'log_watcher_alerts_total{host="mc-01",rule="bruteforce"} 1' in text
-    assert [p.name for p in tmp_path.iterdir()] == ["log_watcher.prom"]  # no temp files left
+    text = (tmp_path / "logwarden.prom").read_text()
+    assert 'logwarden_events_total{host="mc-01",kind="failed"} 7' in text
+    assert 'logwarden_alerts_total{host="mc-01",rule="bruteforce"} 1' in text
+    assert [p.name for p in tmp_path.iterdir()] == ["logwarden.prom"]  # no temp files left
 
 
 def test_state_roundtrip(tmp_path):

@@ -12,4 +12,4 @@ test:
 	python3 -m pytest -q
 
 scan: ## try it on the sample log
-	PYTHONPATH=src python3 -m logwatcher.cli --scan tests/fixtures/auth.log
+	PYTHONPATH=src python3 -m logwarden.cli --scan tests/fixtures/auth.log

@@ -18,7 +18,7 @@ from .detector import Detector
 from .parser import Event
 from .sources import follow_file, follow_journal, read_file
 
-log = logging.getLogger("log-watcher")
+log = logging.getLogger("logwarden")
 
 
 def run(events: Iterable[Event], cfg: Config, sinks: list[Sink], persist: bool = True) -> Detector:
@@ -51,7 +51,7 @@ def _flush(detector: Detector, cfg: Config, persist: bool) -> None:
 
 
 def main(argv: list[str] | None = None) -> int:
-    p = argparse.ArgumentParser(prog="log-watcher", description=__doc__)
+    p = argparse.ArgumentParser(prog="logwarden", description=__doc__)
     p.add_argument("-c", "--config", type=Path, help="path to config.toml")
     p.add_argument(
         "--scan", type=Path, metavar="LOGFILE", help="analyse an existing log file once and exit (no state, no Discord)"

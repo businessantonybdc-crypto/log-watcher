@@ -1,7 +1,7 @@
 from datetime import UTC, datetime, timedelta
 
-from logwatcher.detector import Detector, Settings, Severity
-from logwatcher.parser import Event, Kind
+from logwarden.detector import Detector, Settings, Severity
+from logwarden.parser import Event, Kind
 
 T0 = datetime(2026, 11, 9, 10, 0, tzinfo=UTC)
 

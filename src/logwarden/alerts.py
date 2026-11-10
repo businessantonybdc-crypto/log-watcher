@@ -52,7 +52,7 @@ class DiscordSink:
                     "description": alert.message,
                     "color": _COLOR[alert.severity],
                     "timestamp": alert.time.isoformat(),
-                    "footer": {"text": "log-watcher"},
+                    "footer": {"text": "logwarden"},
                 }
             ],
             # Usernames and IPs come from attackers: never let them ping @everyone.
@@ -65,7 +65,7 @@ class DiscordSink:
             self.url,
             data=data,
             method="POST",
-            headers={"Content-Type": "application/json", "User-Agent": "log-watcher/1.0"},
+            headers={"Content-Type": "application/json", "User-Agent": "logwarden/1.0"},
         )
         try:
             with urllib.request.urlopen(req, timeout=self.timeout):

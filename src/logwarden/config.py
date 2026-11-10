@@ -15,7 +15,7 @@ from .detector import Settings
 class Config:
     source: str = "journal"  # "journal" or "file"
     log_file: Path = Path("/var/log/auth.log")
-    state_file: Path = Path("/var/lib/log-watcher/state.json")
+    state_file: Path = Path("/var/lib/logwarden/state.json")
     metrics_dir: Path | None = Path("/var/lib/node_exporter/textfile_collector")
     discord_webhook: str | None = None
     host: str = field(default_factory=lambda: os.uname().nodename)
@@ -39,7 +39,7 @@ def load(path: Path | None) -> Config:
     cfg.host = out.get("host", cfg.host)
     # Secrets can come from the environment or a file instead of the config.
     cfg.discord_webhook = (
-        os.environ.get("LOG_WATCHER_DISCORD_WEBHOOK")
+        os.environ.get("LOGWARDEN_DISCORD_WEBHOOK")
         or _read_secret(out.get("discord_webhook_file"))
         or out.get("discord_webhook")
         or None

@@ -1,4 +1,4 @@
-# log-watcher
+# logwarden
 
 A small intrusion detector for Linux servers. It follows the SSH and sudo logs (journald or `auth.log`),
 recognises attack patterns and reports them to Discord and Prometheus.
@@ -41,8 +41,8 @@ $ make scan
 
 ```bash
 sudo ./install.sh            # venv in /opt, system user, hardened systemd unit
-sudo $EDITOR /etc/log-watcher/config.toml
-journalctl -u log-watcher -f
+sudo $EDITOR /etc/logwarden/config.toml
+journalctl -u logwarden -f
 ```
 
 ## Tests
@@ -57,8 +57,8 @@ atomic metric writes and the Discord payload. CI runs them on Python 3.11, 3.12 
 - **No double counting.** sshd logs `Invalid user X` *and* `Failed password for invalid user X` for the same attempt; only the first is counted, otherwise thresholds would trigger at half the real number.
 - **Attackers control the input.** Usernames end up in Discord messages, so mentions are disabled (`allowed_mentions: []`), so a username like `@everyone` can't ping the server.
 - **Survives log rotation** like `tail -F` (inode and size check), and the systemd unit runs as an unprivileged user that can read logs but nothing else.
-- **Complements, doesn't replace, fail2ban** from [server-baseline](https://github.com/businessantonybdc-crypto/server-baseline): fail2ban blocks, log-watcher explains what happened and catches the logins that *succeeded*.
+- **Complements, doesn't replace, fail2ban** from [bastion](https://github.com/antony-bdc/bastion): fail2ban blocks, logwarden explains what happened and catches the logins that *succeeded*.
 
 ---
 
-Part of my homelab series → [server-baseline](https://github.com/businessantonybdc-crypto/server-baseline) · [homelab-monitoring](https://github.com/businessantonybdc-crypto/homelab-monitoring)
+Part of my homelab series → [bastion](https://github.com/antony-bdc/bastion) · [observatory](https://github.com/antony-bdc/observatory)

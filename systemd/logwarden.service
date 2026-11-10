@@ -1,18 +1,18 @@
 [Unit]
-Description=log-watcher: SSH brute force and suspicious login detection
+Description=logwarden: SSH brute force and suspicious login detection
 After=network-online.target systemd-journald.service
 Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=/opt/log-watcher/venv/bin/log-watcher --config /etc/log-watcher/config.toml
+ExecStart=/opt/logwarden/venv/bin/logwarden --config /etc/logwarden/config.toml
 Restart=on-failure
 RestartSec=5
 # Needs to read the journal, nothing else.
-User=log-watcher
+User=logwarden
 Group=systemd-journal
 SupplementaryGroups=adm
-StateDirectory=log-watcher
+StateDirectory=logwarden
 ProtectSystem=strict
 ProtectHome=true
 ReadWritePaths=/var/lib/node_exporter/textfile_collector

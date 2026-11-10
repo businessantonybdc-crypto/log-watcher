@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "log-watcher"
+name = "logwarden"
 version = "1.0.0"
 description = "Watches SSH and sudo logs, detects brute force and suspicious logins, alerts on Discord and exports Prometheus metrics."
 readme = "README.md"
@@ -15,7 +15,7 @@ dependencies = []   # standard library only, easy to drop on any server
 dev = ["pytest>=8", "ruff>=0.6"]
 
 [project.scripts]
-log-watcher = "logwatcher.cli:main"
+logwarden = "logwarden.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

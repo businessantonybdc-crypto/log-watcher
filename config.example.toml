@@ -1,4 +1,4 @@
-# /etc/log-watcher/config.toml
+# /etc/logwarden/config.toml
 
 [source]
 type = "journal"              # "journal" (systemd) or "file"
@@ -13,7 +13,7 @@ ignore_networks = ["127.0.0.0/8", "::1/128"]   # add your LAN, e.g. "192.168.1.0
 alert_on_sudo = false             # report every sudo command (noisy)
 
 [output]
-state_file = "/var/lib/log-watcher/state.json"
+state_file = "/var/lib/logwarden/state.json"
 metrics_dir = "/var/lib/node_exporter/textfile_collector"   # "" to disable
-# Prefer the file or the LOG_WATCHER_DISCORD_WEBHOOK env variable over putting the URL here.
-discord_webhook_file = "/etc/log-watcher/discord_webhook"
+# Prefer the file or the LOGWARDEN_DISCORD_WEBHOOK env variable over putting the URL here.
+discord_webhook_file = "/etc/logwarden/discord_webhook"

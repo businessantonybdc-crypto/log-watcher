@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta, timezone
 
-from logwatcher.parser import Kind, parse_line, parse_message
+from logwarden.parser import Kind, parse_line, parse_message
 
 TZ = timezone(timedelta(hours=1))
 NOW = datetime(2026, 11, 9, 12, 0, tzinfo=TZ)
